@@ -1,0 +1,44 @@
+
+alias l="ls"
+alias la="ls -a"
+alias ll="ls -l"
+alias ltr="ls -ltr"
+
+alias v="vim"
+alias a="atom"
+alias s="sublime_text"
+
+alias shutdown="shutdown -h now"
+
+alias chrome='google-chrome-stable --log-level=3 --new-window '
+
+alias picon="ssh pi@192.168.0.100"
+alias piconw="ssh pi@192.168.0.100"
+
+alias gitall='git add . ; git commit -m "$(date "+%Y/%m/%d  %H:%M.%S")" ; git push'
+
+alias pi_commit="sudo chmod 777 $HOME/dev/php/manager ; sudo scp -c aes128-ctr -r $HOME/dev/php/manager/* pi@192.168.0.100:/var/www/html/manager"
+alias pi_commitw="chmod 777 $HOME/dev/php/manager ; scp -c aes128-ctr -r $HOME/dev/php/manager/* pi@192.168.0.100:/var/www/html/manager"
+
+alias ssh-agent-kill="ps | grep ssh-agent | awk '{print $1;}' | xargs kill"
+
+alias conv-sjis="iconv -f UTF-8 -t SJIS $1"
+
+
+#------------------------------------------------------------------------------------------------
+# Bash on Windowsのエイリアス
+#------------------------------------------------------------------------------------------------
+if [ "${OS}" == "${OS_BASH_ON_WINDOWS}" ]; then
+  alias wcd="cd ${WINHOME}"
+fi
+
+
+#------------------------------------------------------------------------------------------------
+# Windowsのエイリアス(bash.exe)
+#------------------------------------------------------------------------------------------------
+if [ "${OS}" == "${OS_WINDOWS}" ]; then
+  alias chrome="'/c/Program Files (x86)/Google/Chrome/Application/chrome.exe'"
+  alias cls="clear"
+fi
+
+

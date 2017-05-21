@@ -1,0 +1,232 @@
+"------------------------------------------------------------------------------------------------
+" Vimp Config
+"------------------------------------------------------------------------------------------------
+" タイトル文字列
+set titlestring=firefox
+
+" スクロールの端などの際に出るbeepをoff
+beep off
+
+" エラー時にベルを鳴らさない
+set noerrorbells
+
+"GUI(全非表示)
+set guioptions=
+
+"hint用語 中段のみ使う
+hintchars=laksjdhfg
+
+" プライベートブラウジング
+noremap <C-p> :winopen -private<CR>
+
+" 検索時、大文字が含まれている場合にのみ case sensitiveにする
+set ignorecase
+set smartcase
+
+" デフォルトの検索エンジン
+set defsearch=google
+
+"自動補完の候補
+set complete=sl
+
+" コマンドモードではIMEをOFFに
+style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+" 入力欄に自動フォーカスしない
+set focuscontent
+
+" ヒントに使用する文字。ここの設定は0からスタートだが表示は1から
+set hintchars=;asdfghjkl
+
+"------------------------------------------------------------------------------------------------
+" Key Maps
+"------------------------------------------------------------------------------------------------
+" h,lに前のタブ,次のタブ
+map h <C-PageUp>
+map l <C-PageDown>
+
+" h/lに左右タブ移動
+map h gT
+map l gt
+
+" H/L ブラウザの戻る/進む
+map H <A-Left>
+map L <A-Right>
+
+" j,kによる上下スクロールの移動量をx 倍に設定
+noremap j 10<C-e>
+noremap k 10<C-y>
+
+" Ctrl+aで全選択になるようにする
+noremap <C-a> i<C-a>
+inoremap <C-a> <insert><C-a><insert>
+
+" Uで最近閉じたタブを表示する
+map U :u<Space>
+
+" Ctrl+r で再起動
+map <C-r> :restart<CR>
+" R で.vimperatorrcを再読込み
+map R :source ~/dotfiles/.vimperatorrc<CR>
+
+" sでぐぐる
+nnoremap s :tabopen<Space>google<Space>
+
+" 選択文字列でぐぐる(マウスとVISUALモードの選択時に対応)
+nmap S <C-c>:tabopen<Space>google<Space><C-v><CR>
+vmap S <C-c><Esc><Esc>:tabopen<Space>google<Space><C-v><CR>
+
+" pは文字列によってURLと判断されて誤爆するので明示的にGoogle検索を指定する
+nnoremap p :tabopen<Space>google<Space><C-v><CR>
+
+"------------------------------------------------------------------------------------------------
+" Firefox Config
+"------------------------------------------------------------------------------------------------
+" ダウンロードウィンドウを完了後自動で閉じる
+set! browser.download.manager.closeWhenDone=true
+" ダウンロード履歴をFirefox終了時に削除
+set! browser.download.manager.retention=1
+" ファイルダウンロード完了時のウイルススキャン機能オフ
+set! browser.download.manager.scanWhenDone=false
+" JavaScriptでのウィンドウ移動・リサイズ拒否
+set! dom.disable_window_move_resize=true
+" JavaScriptのステータスバー操作を無効化
+set! dom.event.contextmenu.enabled=false
+" アドオンインストール時の待ち時間カット
+set! security.dialog_enable_delay=0
+"最小化した時にメモリを開放
+set! config.trim_on_minimize=true::w
+" 全てのテキストボックスでもスペルチェックをする
+set! layout.spellcheckDefault=true
+" Ctrl + Tab でブラウザのタブプレビュー表示
+set! browser.ctrlTab.previews=true
+" タブ開閉のアニメーション無効
+set! browser.tabs.animate=false
+" スクロールバーで中クリックした位置にスクロールポジションを移動する
+set! middlemouse.scrollbarPosition=true
+" 右クリックを禁止させない
+set! dom.event.contextmenu.enabled=true
+" Ubuntuの場合,Unityを無効化
+ui.use_unity_menubar=false
+
+
+"------------------------------------------------------------------------------------------------
+" Qmarks
+"------------------------------------------------------------------------------------------------
+:qmark d https://www.dropbox.com/home
+:qmark m https://mail.google.com/mail/u/0/#inbox
+:qmark y https://jp.mg5.mail.yahoo.co.jp/neo/launch
+:qmark g https://github.com/masayu1724
+:qmark b https://app.gistboxapp.com/library/my-gists
+:qmark a https://www.alpha-prm.jp/login.html
+"=======================================================
+
+
+"------------------------------------------------------------------------------------------------
+" Addon
+"------------------------------------------------------------------------------------------------
+" DNS Flusher(アドオン前提。動作確認：3.1.1)
+command flush javascript dnsFlusher.refreshdns()
+noremap <C-d> :flush<CR>
+
+" Google Transrator(アドオン前提。動作確認：2.1.0.3m)
+command transrate javascript zol_bod_google_translator.ToolBarTranslatorClick()
+
+
+"------------------------------------------------------------------------------------------------
+" Scripts
+"------------------------------------------------------------------------------------------------
+noremap <C-y> :transrate<CR>
+
+javascript <<EOM
+  liberator.globalVariables.copy_templates = [
+    { label: 'title', value: '%TITLE%' },
+    { label: 'url', value: '%URL%' },
+    { label: 'anchor', value: '<a href="%URL%">%TITLE%</a>' },
+    { label: 'markdown', value: '[%TITLE%](%URL%)' },
+  ];
+EOM
+map CT :copy title<CR>
+map CU :copy url<CR>
+map CA :copy anchor<CR>
+map CM :copy markdown<CR>
+
+
+" feedSomeKeys_3.js
+"Gmail
+lazy fmaps -urls='mail\.google\.com/mail' c / j k n p o u e x s r a # [ ] z ? gi gs gt gd ga gb gc gl b <S-i> <C-h> <C-Enter>
+"Google Calendar
+lazy fmaps -urls='www\.google\.com/calendar' -events=vkeydown k j r t d w m c <Del> / + q s ?
+"Google Docs
+lazy fmaps -urls='docs\.google\.com/' <Del> <C-x> <C-d> <C-v> <C-c> <C-y> <C-z> <C-a>
+"Feedly
+lazy fmaps -urls='feedly\.com/' gm ga gg r j k n p o v m x s e t ? <S-m>
+
+
+" multi_requester.js
+javascript <<EOM
+liberator.globalVariables.multi_requester_siteinfo = [
+{
+name:          'hdksjakjdsa',                           // required: subcommand name
+description:   'translate.google',                      // required: commandline short help
+url:           'http://translate.google.co.jp/?hl=ja#en/ja/%s',       // required: %s <-- replace string
+xpath:         'id("bodyContent")/p[1]',                          // optional: default all
+srcEncode:     '',                    // optional: default UTF-8
+urlEncode:     ',                    // optional: default srcEncode
+ignoreTags:    'img',                          // optional: default script, syntax 'tag1,tag2,……'
+},
+];
+EOM
+
+
+"------------------------------------------------------------------------------------------------
+" Color Schemes
+"------------------------------------------------------------------------------------------------
+"colorscheme読み込み
+":colorscheme abyss
+
+" キャレット幅を変更
+set! ui.caretWidth=2
+
+" Vimperator Molokai
+" Based on molokai.vim in https://github.com/vehk/dotfiles/blob/master/vim/colors/molokai.vim
+" See also term colors: https://github.com/vehk/dotfiles/blob/master/colors/molokai
+hi Normal               background: #121112; color:#D0CFD0;
+hi CmdLine              background: #121112; color:#D0CFD0;
+hi CompGroup            background: #121112; color:#D0CFD0;
+hi CompTitle            background: #1c1b1c; font-weight: bold;
+hi CompTitle>*          color: #D0CFD0; padding: 1px 0.5ex;
+hi CompItem             background:#121112; color:#D0CFD0;
+hi CompItem[selected]   color: #FF9926; background: #262426;
+hi CompDesc             width: 500px; max-width: 500px; color: #465457;
+hi CompMsg              margin-left: 16px;
+hi ErrorMsg             background: #D7005F; color: #D0CFD0; font-weight: bold;
+hi Filter               color: #FF8700; background: #262426;
+hi StatusLine           color: #D0CFD0; background: transparent; font-weight: normal;
+hi Hint                 font-family: monospace; font-size: 10px; font-weight: bold; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px;
+hi Hint::after          content: attr(number);
+hi HintActive           background-color: #88FF00; color: black;
+hi HintElem             background-color: yellow; color: black;
+hi HintImage            opacity: .5;
+hi URL                  text-decoration: none; color: #87FF00;
+hi ModeMsg              color: white; background: #3E6700; border-radius: 1px; padding: 0px 5px;
+hi PromptText           color: white; background: #860EFF;
+hi MoreMsg              background-color: #121112; color: #87FF00;
+hi Tag                  color: #005F87;
+hi InfoMsg              background: #121112; color: #87FF00;
+hi WarningMsg           background: #121112; color: #D7005F;
+hi Null                 color: #005F87;
+hi Number               color: #005F87;
+hi NonText              color: #B973FF; min-height: 16px; padding-left: 2px;
+hi Title                background-color: #D7005F; color: #D0CFD0; font-weight: bold;
+hi Indicator            color: #D7005F;
+hi ContentSeparator     border-top: 1px solid #262426; display: -moz-box;
+
+hi Hint font-family: Arial; font-size: 21px; font-weight: bold; text-shadow: -1px -1px 2px black, 1px -1px 2px black, -1px 1px 2px black, 1px 1px 2px black; color: #33cccc;
+hi HintElem color: gray; background-color: #a1e4e6;
+hi HintActive color: black; background-color: #ff8700;
+hi ErrorMsg color:white; background-color: #ec6aa1;
+
+
+" 読み込み完了メッセージ
+echo "Loaded from vimperatorrc."

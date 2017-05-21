@@ -1,0 +1,66 @@
+#------------------------------------------------------------------------------------------------
+# Settings
+#------------------------------------------------------------------------------------------------
+let scrollstep = 250
+let fullpagescrollpercent = 100
+let typelinkhintsdelay = 0
+let locale = "jp"
+"set nohud
+set noautofocus
+set autohidecursor
+set smoothscroll
+set autoupdategist
+"let hintcharacters = "asdfghjklzxcvbnm"
+let hintcharacters = "1234567890"
+let barposition = "bottom"
+
+#------------------------------------------------------------------------------------------------
+# Key Maps
+#------------------------------------------------------------------------------------------------
+map h previousTab
+map l nextTab
+map gh firstTab
+map gl lastTab
+map i goToInput
+map a goToInput
+
+unmap S
+map ; openCommandBar
+map <C-g> :execute vyP<CR>
+map P :open 192.168.0.100<CR>
+map V :open 192.168.11.111<CR>
+
+#------------------------------------------------------------------------------------------------
+# Search Engines
+#------------------------------------------------------------------------------------------------
+let searchengine youtube = "https://www.youtube.com/results?search_query=%s"
+let searchengine amazon = "http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&url=search-alias%3Daps&field-keywords=%s"
+let searchengine trajslate_google = "https://translate.google.co.jp/?hl=ja#en/ja/%s"
+let searchengine qiita = "https://qiita.com/search?utf8=%E2%9C%93&sort=rel&q=%s&sort=rel"
+let searchengine wikipedia = "https://ja.wikipedia.org/wiki/%s"
+let searchalias you = "youtube"
+let searchalias ama = "amazon"
+let searchalias tg = "trajslate_google"
+let searchalias qi = "qiita"
+let searchalias wiki = "wikipedia"
+
+#------------------------------------------------------------------------------------------------
+# Qmarks
+#------------------------------------------------------------------------------------------------
+let qmark m = ["https://drive.google.com/drive/my-drive"]
+let qmark d = ["https://drive.google.com/drive/my-drive"]
+let qmark y = ["https://jp.mg5.mail.yahoo.co.jp"]
+
+let qmark g = ["https://github.com/masa1724"]
+let qmark c = ["https://cybozulive.com/login"]
+let qmark s = ["https://trustpro-apps.tdc.co.jp/trustpro/index.action"]
+let qmark j = ["https://www.alpha-prm.jp/login.html"]
+
+let qmark e = ["chrome://extensions"]
+
+#------------------------------------------------------------------------------------------------
+# Javascripts
+#------------------------------------------------------------------------------------------------
+a(href) -> {{
+  window.open(href, '_blank');
+}}
