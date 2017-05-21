@@ -1,6 +1,6 @@
 
 #------------------------------------------------------------------------------------------------
-# OSîªíËópÇÃä¬ã´ïœêîê›íË
+# OSÂà§ÂÆöÁî®„ÅÆÁí∞Â¢ÉÂ§âÊï∞Ë®≠ÂÆö
 #------------------------------------------------------------------------------------------------
 export OS_BASH_ON_WINDOWS="BashOnWindows"
 export OS_LINUX="Linux"
@@ -20,7 +20,7 @@ fi
 
 
 #------------------------------------------------------------------------------------------------
-# ä¬ã´ïœêîÇÃê›íË
+# Áí∞Â¢ÉÂ§âÊï∞„ÅÆË®≠ÂÆö
 #------------------------------------------------------------------------------------------------
 if [ "${OS}" == "${OS_BASH_ON_WINDOWS}" ]; then
   export GOOGLE_DRIVE="${WINHOME}/GoogleDrive"
@@ -28,9 +28,9 @@ else
   export GOOGLE_DRIVE="${HOME}/GoogleDrive"
 fi
 
-export DOTFILES="${GOOGLE_DRIVE}/dotfiles"
-export MY_BIN="${GOOGLE_DRIVE}/bin"
-export MY_CONF="${GOOGLE_DRIVE}/etc/my_conf"
+export DOTFILES="${HOME}/dotfiles"
+export MY_BIN="${HOME}/bin"
+export MY_CONF="${HOME}/etc/my_conf"
 export PATH=$PATH:${MY_BIN}
 
 #. ${MY_CONF}
@@ -44,7 +44,7 @@ export PATH=$PATH:${MY_BIN}
 
 
 #------------------------------------------------------------------------------------------------
-# SSHê›íË
+# SSHË®≠ÂÆö
 #------------------------------------------------------------------------------------------------
 SSH_ENVIRONMENT="${HOME}/.ssh/environment"
 
@@ -78,7 +78,7 @@ ls -1d ~/.ssh/* | egrep -v '*.pub|known_hosts|config' | grep rsa | xargs ssh-add
 
 
 #------------------------------------------------------------------------------------------------
-# Rubyê›íË
+# RubyË®≠ÂÆö
 #------------------------------------------------------------------------------------------------
 export RBENV_ROOT="${HOME}/.rbenv"
 if [ -d "${RBENV_ROOT}" ]; then
